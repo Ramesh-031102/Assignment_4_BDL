@@ -4,25 +4,25 @@ stages:
     cmd: python download.py
     params:
       params.yaml:
-        nlocs: 8
+        nlocs: 10
         year: 2003
     outs:
     - path: downloaded_files/
       hash: md5
-      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
-      size: 34469589
-      nfiles: 8
+      md5: b0a9d905b8da0ba8877a51a0775230aa.dir
+      size: 35265064
+      nfiles: 10
   prepare:
     cmd: python prepare.py
     deps:
     - path: downloaded_files/
       hash: md5
-      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
-      size: 34469589
-      nfiles: 8
+      md5: b0a9d905b8da0ba8877a51a0775230aa.dir
+      size: 35265064
+      nfiles: 10
     params:
       params.yaml:
-        nlocs: 8
+        nlocs: 10
         year: 2003
     outs:
     - path: fieldlist/
@@ -32,17 +32,17 @@ stages:
       nfiles: 1
     - path: groundtruth/
       hash: md5
-      md5: f13e4182df0889123b3784b6ca3f386e.dir
-      size: 1608
-      nfiles: 8
+      md5: 28d5d0326dc757ef9b9473ae6744d655.dir
+      size: 2013
+      nfiles: 10
   process:
     cmd: python process.py
     deps:
     - path: downloaded_files/
       hash: md5
-      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
-      size: 34469589
-      nfiles: 8
+      md5: b0a9d905b8da0ba8877a51a0775230aa.dir
+      size: 35265064
+      nfiles: 10
     - path: fieldlist/
       hash: md5
       md5: ee41e5ef624de1bad1e192c8fdd5d290.dir
@@ -50,14 +50,14 @@ stages:
       nfiles: 1
     params:
       params.yaml:
-        nlocs: 8
+        nlocs: 10
         year: 2003
     outs:
     - path: predicted/
       hash: md5
-      md5: 089cea06fd58ad7dfc1aedfbaea714a9.dir
-      size: 3994
-      nfiles: 8
+      md5: 1f80d74b446d4c5d3464637f90b761a7.dir
+      size: 4973
+      nfiles: 10
   evaluate:
     cmd: python evaluate.py
     deps:
@@ -68,21 +68,21 @@ stages:
       nfiles: 1
     - path: groundtruth/
       hash: md5
-      md5: f13e4182df0889123b3784b6ca3f386e.dir
-      size: 1608
-      nfiles: 8
+      md5: 28d5d0326dc757ef9b9473ae6744d655.dir
+      size: 2013
+      nfiles: 10
     - path: predicted/
       hash: md5
-      md5: 089cea06fd58ad7dfc1aedfbaea714a9.dir
-      size: 3994
-      nfiles: 8
+      md5: 1f80d74b446d4c5d3464637f90b761a7.dir
+      size: 4973
+      nfiles: 10
     params:
       params.yaml:
-        nlocs: 8
+        nlocs: 10
         year: 2003
     outs:
     - path: r2score/
       hash: md5
-      md5: 3a5959956d972ae9807265d927a0dbf8.dir
-      size: 1032
+      md5: 669699571bed5b5b2767df44f89162c6.dir
+      size: 1290
       nfiles: 1
