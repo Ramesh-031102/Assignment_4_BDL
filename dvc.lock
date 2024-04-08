@@ -1,0 +1,88 @@
+schema: '2.0'
+stages:
+  download:
+    cmd: python download.py
+    params:
+      params.yaml:
+        nlocs: 8
+        year: 2003
+    outs:
+    - path: downloaded_files/
+      hash: md5
+      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
+      size: 34469589
+      nfiles: 8
+  prepare:
+    cmd: python prepare.py
+    deps:
+    - path: downloaded_files/
+      hash: md5
+      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
+      size: 34469589
+      nfiles: 8
+    params:
+      params.yaml:
+        nlocs: 8
+        year: 2003
+    outs:
+    - path: fieldlist/
+      hash: md5
+      md5: ee41e5ef624de1bad1e192c8fdd5d290.dir
+      size: 64
+      nfiles: 1
+    - path: groundtruth/
+      hash: md5
+      md5: f13e4182df0889123b3784b6ca3f386e.dir
+      size: 1608
+      nfiles: 8
+  process:
+    cmd: python process.py
+    deps:
+    - path: downloaded_files/
+      hash: md5
+      md5: 4b0b3576e5f368654b07b5aacf9276fd.dir
+      size: 34469589
+      nfiles: 8
+    - path: fieldlist/
+      hash: md5
+      md5: ee41e5ef624de1bad1e192c8fdd5d290.dir
+      size: 64
+      nfiles: 1
+    params:
+      params.yaml:
+        nlocs: 8
+        year: 2003
+    outs:
+    - path: predicted/
+      hash: md5
+      md5: 089cea06fd58ad7dfc1aedfbaea714a9.dir
+      size: 3994
+      nfiles: 8
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - path: fieldlist/
+      hash: md5
+      md5: ee41e5ef624de1bad1e192c8fdd5d290.dir
+      size: 64
+      nfiles: 1
+    - path: groundtruth/
+      hash: md5
+      md5: f13e4182df0889123b3784b6ca3f386e.dir
+      size: 1608
+      nfiles: 8
+    - path: predicted/
+      hash: md5
+      md5: 089cea06fd58ad7dfc1aedfbaea714a9.dir
+      size: 3994
+      nfiles: 8
+    params:
+      params.yaml:
+        nlocs: 8
+        year: 2003
+    outs:
+    - path: r2score/
+      hash: md5
+      md5: 3a5959956d972ae9807265d927a0dbf8.dir
+      size: 1032
+      nfiles: 1
